@@ -67,7 +67,7 @@ function draw() {
   
   const cx        = width / 2;      // Obtiene la coordenada x del centro del canvas.
   const cy        = height / 2;     // Obtiene la coordenada y del centro del canvas.
-  const r         = tamano;         // Establece el radio del círculo exterior.
+  var   r         = tamano;         // Establece el radio del círculo exterior.
   const angleStep = 45;             // Establece el ángulo de separación entre cada punto.
   const start     = angleStep / 2;  // Establece el ángulo inicial.
 
@@ -75,6 +75,7 @@ function draw() {
   verticesTrapecios(); // Calcula los vértices de los trapecios.
 
 
+  // Dibuja o no en función del check cada uno de los trapecios
   for (let i = 0; i < 8; i++) {
     if (arrCheckbox[i].checked()) {
       dibujaTrapecio(arrPuntosTrapecios[i], i); // Dibuja cada trapecio con su respectivo color.
