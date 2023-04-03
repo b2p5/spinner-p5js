@@ -67,7 +67,7 @@ function draw() {
   
   const cx        = width / 2;      // Obtiene la coordenada x del centro del canvas.
   const cy        = height / 2;     // Obtiene la coordenada y del centro del canvas.
-  const r         = tamano;            // Establece el radio del círculo exterior.
+  const r         = tamano;         // Establece el radio del círculo exterior.
   const angleStep = 45;             // Establece el ángulo de separación entre cada punto.
   const start     = angleStep / 2;  // Establece el ángulo inicial.
 
