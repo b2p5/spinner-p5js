@@ -71,7 +71,7 @@ function draw() {
   const angleStep = 45;             // Establece el ángulo de separación entre cada punto.
   const start     = angleStep / 2;  // Establece el ángulo inicial.
 
-  drawPointsOnCircle(cx, cy, r, angleStep, start, 8); // Dibuja los puntos del círculo exterior e interior.
+  getPointsOnCircle(cx, cy, r, angleStep, start, 8); // Dibuja los puntos del círculo exterior e interior.
   verticesTrapecios(); // Calcula los vértices de los trapecios.
 
 
@@ -85,13 +85,13 @@ function draw() {
 
 
 /*
-La función drawPointsOnCircle() dibuja un conjunto de puntos equidistantes sobre 
+La función getPointsOnCircle() dibuja un conjunto de puntos equidistantes sobre 
 una circunferencia dada por su centro (cx,cy) y su radio (r). Los puntos se dibujan 
 usando el ángulo inicial (start) y el ángulo de incremento (angleStep) dados, y 
 se almacenan en un arreglo para su posterior uso en la generación de los vértices 
 de los trapezoides. 
 */
-function drawPointsOnCircle(cx, cy, r, angleStep, start, numPoints) {
+function getPointsOnCircle(cx, cy, r, angleStep, start, numPoints) {
 
   for (let i = 0; i < numPoints; i++) {
     const angle = i * angleStep - start;  // Calcula el ángulo para el punto actual.
