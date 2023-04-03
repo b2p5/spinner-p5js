@@ -50,7 +50,6 @@ function draw() {
     for (let i = 0; i < 8; i++) {
       if (arrCheckbox[i].checked()) {
         dibujaTrapecio(arrPuntosTrapecios[i], i); // Dibuja cada trapecio con su respectivo color.
-        
       }
     }
 
