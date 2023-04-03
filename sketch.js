@@ -15,6 +15,11 @@ let arrColores = []; // Array para almacenar los colores de los trapecios.
 
 function setup() {
   createCanvas(800, 800); // Crea un canvas de 800x800.
+
+  // Crea el checkbox y lo posiciona en la esquina superior izquierda del canvas
+  checkbox = createCheckbox('Mostrar estrella', false);
+  checkbox.position(10, 10);
+
   angleMode(DEGREES); // Cambia el modo de ángulos a grados.
   strokeWeight(1); // Establece el grosor de los trazos en 1 píxel.
   stroke(5, 5, 5); // Establece el color de los trazos en RGB(5, 5, 5).
