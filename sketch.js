@@ -11,14 +11,21 @@ en la pantalla.
 let puntos = []; // Array para almacenar los puntos que forman el círculo exterior y el interior.
 let arrPuntosTrapecios = []; // Array para almacenar los vértices de los trapecios.
 let arrColores = []; // Array para almacenar los colores de los trapecios.
-
+let arrCheckbox = [];
 
 function setup() {
   createCanvas(800, 800); // Crea un canvas de 800x800.
 
   // Crea el checkbox y lo posiciona en la esquina superior izquierda del canvas
-  checkbox = createCheckbox('Mostrar estrella', false);
-  checkbox.position(10, 10);
+  for (let i = 0; i < 8; i++) {
+    checkbox = createCheckbox('Trapecio ' + (i+1)  , false);
+
+    //checkbox.position(10, 10 + i*30);
+    checkbox.position(10 + i*100, 10 );
+    arrCheckbox[i] = checkbox;
+  
+  }
+
 
   angleMode(DEGREES); // Cambia el modo de ángulos a grados.
   strokeWeight(1); // Establece el grosor de los trazos en 1 píxel.
@@ -38,11 +45,23 @@ function draw() {
   drawPointsOnCircle(cx, cy, r, angleStep, start, 8); // Dibuja los puntos del círculo exterior e interior.
   verticesTrapecios(); // Calcula los vértices de los trapecios.
 
-  for (let i = 0; i < 8; i++) {
-    dibujaTrapecio(arrPuntosTrapecios[i], i); // Dibuja cada trapecio con su respectivo color.
-  }
+  //if (checkbox.checked()) {
 
-  noLoop(); // Detiene el loop de dibujo.
+    for (let i = 0; i < 8; i++) {
+      if (arrCheckbox[i].checked()) {
+        dibujaTrapecio(arrPuntosTrapecios[i], i); // Dibuja cada trapecio con su respectivo color.
+        
+      }
+    }
+
+    //noLoop(); // Detiene el loop de dibujo.
+
+  /* }else{
+    createCanvas(800, 800); // Crea un canvas de 800x800.
+
+  }
+ */
+  
 }
 
 
