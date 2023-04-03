@@ -17,14 +17,11 @@ var checkbox;
 function setup() {
   createCanvas(800, 800); // Crea un canvas de 800x800.
 
-  // Crea el checkbox y lo posiciona en la esquina superior izquierda del canvas
+  // Crea los checkbox y lo posiciona en la primera línea del canvas
   for (let i = 0; i < 8; i++) {
-
     checkbox = createCheckbox('Trapecio ' + (i+1)  , false);
-    //checkbox.position(10, 10 + i*30);
     checkbox.position(10 + i*100, 10 );
     arrCheckbox[i] = checkbox;
-  
   }
 
 
@@ -53,8 +50,6 @@ function draw() {
     }
   }
 
- 
-  
 }
 
 
