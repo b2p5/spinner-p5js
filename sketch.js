@@ -1,5 +1,5 @@
 /*
-Spinner
+Spinner con el logo de Detailorg
 
 Este programa dibuja una serie de trapezoides en una circunferencia. Cada trapezoide
 se colorea de un color diferente y se dibuja con vértices determinados por puntos
@@ -8,11 +8,15 @@ guardados en un arreglo. Luego, se generan los vértices de los trapezoides y se
 en la pantalla. 
 */
 
-let puntos = []; // Array para almacenar los puntos que forman el círculo exterior y el interior.
-let arrPuntosTrapecios = []; // Array para almacenar los vértices de los trapecios.
-let arrColores = []; // Array para almacenar los colores de los trapecios.
-let arrCheckbox = [];
-var checkbox;
+let puntos              = [];   // Array para almacenar los puntos que forman el círculo exterior y el interior.
+let arrPuntosTrapecios  = [];   // Array para almacenar los vértices de los trapecios.
+let arrColores          = [];   // Array para almacenar los colores de los trapecios.
+let arrCheckbox         = [];   // Array para almacenar los checks de los trapecios.
+let checkbox;                   // Creación checks individuales
+let alpha               = 170;  //Transparencia
+let sliderAlpha;                //Barra para transparencias
+let tamano              = 400;  //Tamaño
+let sliderTamano;               //Barra para tamaño
 
 function setup() {
   createCanvas(800, 800); // Crea un canvas de 800x800.
@@ -24,21 +28,48 @@ function setup() {
     arrCheckbox[i] = checkbox;
   }
 
+  // Slider para recoger el alpha del logo
+  sliderAlpha = createSlider(0, 255, alpha, 5);
+  sliderAlpha.position(10, 40);
+  sliderAlpha.style('width', '100px');
 
-  angleMode(DEGREES); // Cambia el modo de ángulos a grados.
-  strokeWeight(1); // Establece el grosor de los trazos en 1 píxel.
-  stroke(5, 5, 5); // Establece el color de los trazos en RGB(5, 5, 5).
-  fill(255, 255, 255); // Establece el color de relleno en RGB(255, 255, 255) (blanco).
+  //Texto asociado al slider alpha
+  p = createP('Alpha' );
+  p.style('font-size', '16px');
+  p.position(140, 25);
+
+  // Slider para recoger el tamaño del logo
+  sliderTamano = createSlider(0, 400, tamano, 5);
+  sliderTamano.position(650, 40);
+  sliderTamano.style('width', '100px');
+
+  //Texto asociado al slider alpha
+  p = createP('Tamaño' );
+  p.style('font-size', '16px');
+  p.position(760, 25);
+
+
+  angleMode(DEGREES);   // Cambia el modo de ángulos a grados.
+  strokeWeight(1);      // Establece el grosor de los trazos en 1 píxel.
+  stroke(5, 5, 5);      // Establece el color de los trazos en RGB(5, 5, 5).
+  fill(255, 255, 255);  // Establece el color de relleno en RGB(255, 255, 255) (blanco).
 }
 
 
 function draw() {
   background(255); // Establece el fondo en blanco.
-  const cx = width / 2; // Obtiene la coordenada x del centro del canvas.
-  const cy = height / 2; // Obtiene la coordenada y del centro del canvas.
-  const r = 400; // Establece el radio del círculo exterior.
-  const angleStep = 45; // Establece el ángulo de separación entre cada punto.
-  const start = angleStep / 2; // Establece el ángulo inicial.
+
+  // Leer valor del slider alpha (transparencia)
+  alpha = sliderAlpha.value();
+
+  // Leer valor del slider tamaño
+  tamano = sliderTamano.value();
+  
+  const cx        = width / 2;      // Obtiene la coordenada x del centro del canvas.
+  const cy        = height / 2;     // Obtiene la coordenada y del centro del canvas.
+  const r         = tamano;            // Establece el radio del círculo exterior.
+  const angleStep = 45;             // Establece el ángulo de separación entre cada punto.
+  const start     = angleStep / 2;  // Establece el ángulo inicial.
 
   drawPointsOnCircle(cx, cy, r, angleStep, start, 8); // Dibuja los puntos del círculo exterior e interior.
   verticesTrapecios(); // Calcula los vértices de los trapecios.
@@ -61,17 +92,16 @@ se almacenan en un arreglo para su posterior uso en la generación de los vérti
 de los trapezoides. 
 */
 function drawPointsOnCircle(cx, cy, r, angleStep, start, numPoints) {
-  //strokeWeight(10); // Establece el grosor de los puntos en 10 píxeles.
 
   for (let i = 0; i < numPoints; i++) {
-    const angle = i * angleStep - start; // Calcula el ángulo para el punto actual.
-    const x = cx + r * cos(angle); // Calcula la coordenada x del punto.
-    const y = cy + r * sin(angle); // Calcula la coordenada y del punto.
+    const angle = i * angleStep - start;  // Calcula el ángulo para el punto actual.
+    const x     = cx + r * cos(angle);    // Calcula la coordenada x del punto.
+    const y     = cy + r * sin(angle);    // Calcula la coordenada y del punto.
 
-    puntos[i] = [x, y]; // Agrega el punto al array de puntos.
+    puntos[i]   = [x, y];                 // Agrega el punto al array de puntos.
 
     if (i < 3) {
-      puntos[8 + i] = [x, y]; // Agrega el punto al array de puntos del círculo interior.
+      puntos[8 + i] = [x, y];             // Agrega el punto al array de puntos del círculo interior.
     }
   }
 }
@@ -117,33 +147,35 @@ se cierra el polígono con "endShape(CLOSE)" para que quede completamente llenad
 function dibujaTrapecio(puntos, k) {
   noStroke();
 
+  //Colores de los trapecios
   switch (k) {
     case 0:
-      fill(48, 45, 126, 70);
+      fill(48, 45, 126, alpha);
       break;
     case 1:
-      fill(126, 45, 126, 70);
+      fill(226, 13, 24, alpha);
       break;
     case 2:
-      fill(0, 126, 126, 70);
+      fill(131, 55, 141, alpha);
       break;
     case 3:
-      fill(126, 10, 126, 70);
+      fill(0, 151, 65, alpha);
       break;
     case 4:
-      fill(50, 10, 50, 70);
+      fill(104, 61, 20, alpha);
       break;
     case 5:
-      fill(150, 10, 250, 70);
+      fill(27, 157, 217, alpha);
       break;
     case 6:
-      fill(150, 210, 50, 70);
+      fill(250, 179, 52, alpha);
       break;
     case 7:
-      fill(250, 150, 150, 70);
+      fill(251, 234, 31, alpha);
       break;
   }
 
+  // Dibuja Trapecios
   beginShape();
   vertex(puntos[0][0], puntos[0][1]);
   vertex(puntos[1][0], puntos[1][1]);
